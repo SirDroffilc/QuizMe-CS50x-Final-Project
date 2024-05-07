@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %} | Signup{% endblock %}
+
+{% block content %}
+<h1>Sign Up</h1>
+
+<form action="{{ url_for('auth.signup') }}" method="post">
+    <input name="username" type="text" placeholder="Enter a new username" required autofocus>
+    <input name="password1" type="password" placeholder="Enter a password">
+    <input name="password2" type="password" placeholder="Enter a password">
+    <input type="submit" value="Sign Up">
+</form>
+{% endblock %}

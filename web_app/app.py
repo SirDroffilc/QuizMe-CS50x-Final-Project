@@ -2,7 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
-from flask_bcrypt import Bcrypt
 
 db = SQLAlchemy()
 
@@ -21,8 +20,6 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(user_id)
-
-    bcrypt = Bcrypt(app)
 
     # imports
     from web_app.blueprints.auth.routes import auth
