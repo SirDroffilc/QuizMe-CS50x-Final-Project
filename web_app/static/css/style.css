@@ -1,3 +1,30 @@
+.navbar {
+    background-color: black;
+}
+
+.nav-link {
+    color: gray;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.nav-link:hover, .navbar-brand:hover {
+    color: white;
+}
+
+a[aria-current="page"],
+.navbar-brand
+{
+    font-weight: bold;
+    color:white;
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: white;
+}
+ 
 body {
     background-color: #001021;
     color: white;
