@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, request, url_for, session, flash, get_flashed_messages, redirect
+from flask import render_template, Blueprint, request, url_for, flash, redirect
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -35,8 +35,10 @@ def signup():
             return redirect(url_for('auth.signup'))
         elif len(password1) > 100 or len(password1) < 8:
             flash('Password must be 8-100 characters.', category='error')
+            return redirect(url_for('auth.signup'))
         elif password1 != password2:
             flash("Passwords don't match", category='error')
+            return redirect(url_for('auth.signup'))
         else:
             hashed_pw = generate_password_hash(password1)
             new_user = User(username=username, password=hashed_pw)
@@ -45,7 +47,7 @@ def signup():
             db.session.commit()
             login_user(new_user, remember=True)
             flash("Account successfully created!", category='success')
-            return redirect(url_for('auth.index'))
+            return redirect(url_for('feed.index'))
         
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -66,7 +68,7 @@ def login():
             if check_password_hash(user.password, password):
                 flash("Logged in successfully", category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('auth.index'))
+                return redirect(url_for('feed.index'))
         else:
             flash('Username not found', category='error')        
 

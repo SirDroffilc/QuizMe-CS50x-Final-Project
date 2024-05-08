@@ -2,5 +2,31 @@
 {% block title %} | Quiz{% endblock %}
 
 {% block content %}
-    <h1>QuizMe Quiz</h1>
+    <h1>{{ current_user.username }}'s Quizzes</h1>
+
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th>Title</th>
+              <th>Number of Items</th>
+              <th>Modify Quiz/Add Questions</th>
+            </tr>
+        </thead>
+         
+        <tbody>
+            {% for quiz in quizzes %}
+            <tr>
+                <td>{{ quiz.title }}</td>
+                <td>{{ quiz.total_items }}</td>
+                <td>
+                    <a href="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}">Select Quiz</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+
+
 {% endblock %}

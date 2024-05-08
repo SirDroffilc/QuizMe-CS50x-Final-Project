@@ -15,7 +15,7 @@ class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(30), nullable=False)
     instructions = db.Column(db.String(1000))
-    total_items = db.Column(db.Integer, nullable=False)
+    total_items = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     items = db.relationship('Item')
 

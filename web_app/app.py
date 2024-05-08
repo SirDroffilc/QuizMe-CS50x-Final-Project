@@ -25,10 +25,12 @@ def create_app():
     from web_app.blueprints.auth.routes import auth
     from web_app.blueprints.feed.routes import feed
     from web_app.blueprints.quiz.routes import quiz
+    from web_app.blueprints.profile.routes import profile
 
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(feed, url_prefix='/feed')
     app.register_blueprint(quiz, url_prefix='/quiz')
+    app.register_blueprint(profile, url_prefix='/profile')
 
     migrate = Migrate(app, db)
 
