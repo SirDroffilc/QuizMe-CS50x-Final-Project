@@ -9,7 +9,7 @@ quiz = Blueprint('quiz', __name__, template_folder='templates')
 
 @quiz.route('/')
 def index():
-    quizzes = Quiz.query.filter_by(user_id=current_user.id)
+    quizzes = current_user.quizzes
     return render_template('quiz/index.html', quizzes=quizzes)
 
 
@@ -40,8 +40,40 @@ def create():
 
 @quiz.route('/modify_quiz/<int:quiz_id>/<string:quiz_title>', methods=['GET', 'POST'])
 def modify_quiz(quiz_id, quiz_title):
-    quiz = Quiz.query.filter_by(id=quiz_id).first()
-    return render_template('quiz/modify_quiz.html', quiz=quiz)
+    if request.method == 'GET':
+        quiz = Quiz.query.filter_by(id=quiz_id).first()
+        return render_template('quiz/modify_quiz.html', quiz=quiz)
+    elif request.method == 'POST':
+        quiz = Quiz.query.filter_by(id=quiz_id).first()
+
+        if 'new_title' in request.form.keys():
+            newTitle = request.form.get('new_title')
+            if newTitle:
+                quiz.title = newTitle
+                db.session.commit()
+                flash(f'Title changed to {newTitle}', category="success")
+            else:
+                flash('Blank title is not allowed', category='error')
+
+        elif 'new_instructions' in request.form.keys():
+            new_instructions = request.form.get('new_instructions')
+            if new_instructions:
+                quiz.instructions = new_instructions
+                db.session.commit()
+                flash(f'Title changed to {new_instructions}', category="success")
+            else:
+                flash("Blank instructions is not allowed", category='error')
+        
+        elif 'question' in request.form.keys():
+            new_question = request.form.get('question')
+            answer_key = request.form.get('answer_key')
+
+            pass
+
+        return redirect(url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title))
+
+
+        
 
 
 

@@ -3,5 +3,24 @@
 
 {% block content %}
     <h1>{{ quiz.title }}</h1>
-    <h2>{{ quiz.instructions }}</h2>
+    <p>Instructions: {{ quiz.instructions }}</p>
+    <button type="button" class="btn btn-dark" id="changeTitleButton">Change Title</button>
+    <button type="button" class="btn btn-dark" id="updateInstrucButton">Update Instructions</button>
+    <button type="button" class="btn btn-dark" id="addQuestionButton">Add a Question</button>
+
+    <br /> <br />
+
+    <form action="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}" method="post" id="changeQuizTitleForm" style="display: none;">
+        <input name="new_title" type="text" placeholder="New title" required>
+        <input type="submit" value="Submit"></input>
+    </form>
+    <form action="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}" method="post" id="updateQuizInstrucForm" style="display: none;">
+        <input name="new_instructions" type="text" placeholder="New instructions" required>
+        <input type="submit" value="Submit"></input>
+    </form>
+    <form action="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}" method="post" id="addQuestionForm" style="display: none;">
+        <input name="question" type="text" placeholder="Question" required>
+        <input name="answer_key" type="text" placeholder="Answer Key" required>
+        <input type="submit" value="Submit"></input>
+    </form>
 {% endblock %}

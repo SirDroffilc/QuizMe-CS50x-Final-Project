@@ -5,8 +5,8 @@
 <h1>Log in</h1>
 
 <form action="{{ url_for('auth.login') }}" method="post">
-    <input name="username" type="text" placeholder="Enter username" required autofocus>
-    <input name="password" type="password" placeholder="Enter password">
+    <input name="username" type="text" class="form-control" placeholder="Enter username" required autofocus>
+    <input name="password" type="password" class="form-control" placeholder="Enter password">
     <input type="submit" value="Sign Up">
 </form>
 {% endblock %}
