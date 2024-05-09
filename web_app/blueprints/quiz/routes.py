@@ -8,12 +8,14 @@ from web_app.models import User, Quiz, Item
 quiz = Blueprint('quiz', __name__, template_folder='templates')
 
 @quiz.route('/')
+@login_required
 def index():
     quizzes = current_user.quizzes
     return render_template('quiz/index.html', quizzes=quizzes)
 
 
 @quiz.route('/create', methods=['GET', 'POST'])
+@login_required
 def create():
     if request.method == 'GET':
         return render_template('quiz/create.html')
@@ -39,14 +41,18 @@ def create():
     
 
 @quiz.route('/modify_quiz/<int:quiz_id>/<string:quiz_title>', methods=['GET', 'POST'])
+@login_required
 def modify_quiz(quiz_id, quiz_title):
+    quiz = Quiz.query.filter_by(id=quiz_id).first()
+    if current_user.id != quiz.user_id:
+        return render_template('unauth.html')
+    
     if request.method == 'GET':
-        quiz = Quiz.query.filter_by(id=quiz_id).first()
-        return render_template('quiz/modify_quiz.html', quiz=quiz)
+        quiz_items = quiz.items
+        return render_template('quiz/modify_quiz.html', quiz=quiz, quiz_items=quiz_items)
+    
     elif request.method == 'POST':
-        quiz = Quiz.query.filter_by(id=quiz_id).first()
-
-        if 'new_title' in request.form.keys():
+        if 'new_title' in request.form.keys(): # change title
             newTitle = request.form.get('new_title')
             if newTitle:
                 quiz.title = newTitle
@@ -55,20 +61,37 @@ def modify_quiz(quiz_id, quiz_title):
             else:
                 flash('Blank title is not allowed', category='error')
 
-        elif 'new_instructions' in request.form.keys():
+        elif 'new_instructions' in request.form.keys(): # update instructions
             new_instructions = request.form.get('new_instructions')
             if new_instructions:
                 quiz.instructions = new_instructions
                 db.session.commit()
                 flash(f'Title changed to {new_instructions}', category="success")
             else:
-                flash("Blank instructions is not allowed", category='error')
+                flash("Blank instruction is not allowed", category='error')
         
-        elif 'question' in request.form.keys():
+        elif 'question' in request.form.keys(): # add a question
             new_question = request.form.get('question')
             answer_key = request.form.get('answer_key')
 
-            pass
+            new_item = Item(question=new_question, answer=answer_key, quiz_id=quiz.id)
+            db.session.add(new_item)
+            quiz.total_items += 1
+            db.session.commit()
+
+            flash(f'Question added successfully', category='success')
+
+        elif 'item_id' in request.form.keys(): # delete a question
+            item_id = request.form.get('item_id')
+            item_to_del = Item.query.get(item_id)
+            db.session.delete(item_to_del)
+            quiz.total_items -= 1
+            db.session.commit()
+
+        elif 'quiz_id' in request.form.keys(): # delete the quiz and redirect to index
+            db.session.delete(quiz)
+            db.session.commit()
+            return redirect(url_for('quiz.index'))
 
         return redirect(url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title))
 

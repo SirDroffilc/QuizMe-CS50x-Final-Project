@@ -1,9 +1,10 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_login import LoginManager
+from flask_login import LoginManager, login_required
 
 db = SQLAlchemy()
+
 
 def create_app():
     app = Flask(__name__, template_folder='templates', static_folder='static')
@@ -20,6 +21,10 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(user_id)
+    
+    @login_manager.unauthorized_handler
+    def unauthorized():
+        return render_template('unauth.html')
 
     # imports
     from web_app.blueprints.auth.routes import auth

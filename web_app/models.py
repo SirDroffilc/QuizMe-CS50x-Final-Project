@@ -7,7 +7,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(500), nullable=False)
-    quizzes = db.relationship('Quiz')
+    quizzes = db.relationship('Quiz', cascade="all, delete-orphan", backref="user")
 
 class Quiz(db.Model):
     __tablename__ = 'quizzes'
@@ -17,7 +17,7 @@ class Quiz(db.Model):
     instructions = db.Column(db.String(1000))
     total_items = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    items = db.relationship('Item')
+    items = db.relationship('Item', cascade="all, delete-orphan", backref="quiz")
 
 
 class Item(db.Model):
