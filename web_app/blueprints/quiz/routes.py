@@ -43,7 +43,7 @@ def create():
 @quiz.route('/modify_quiz/<int:quiz_id>/<string:quiz_title>', methods=['GET', 'POST'])
 @login_required
 def modify_quiz(quiz_id, quiz_title):
-    quiz = Quiz.query.filter_by(id=quiz_id).first()
+    quiz = Quiz.query.get(quiz_id)
     if current_user.id != quiz.user_id:
         return render_template('unauth.html')
     
@@ -72,9 +72,23 @@ def modify_quiz(quiz_id, quiz_title):
         
         elif 'question' in request.form.keys(): # add a question
             new_question = request.form.get('question')
+            option1 = request.form.get('option1')
+            option2 = request.form.get('option2')
+            option3 = request.form.get('option3')
+            option4 = request.form.get('option4')
             answer_key = request.form.get('answer_key')
 
-            new_item = Item(question=new_question, answer=answer_key, quiz_id=quiz.id)
+            if not new_question or not option1 or not option2 or not option3 or not option4 or not answer_key:
+                flash('Incomplete details', category='error')
+                return redirect(url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title))
+            elif answer_key not in [option1, option2, option3, option4]:
+                flash('Answer key must be in the options', category='error')
+                return redirect(url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title))
+            
+            new_item = Item(
+                question=new_question,
+                option1=option1, option2=option2, option3=option3, option4=option4, 
+                answer_key=answer_key, quiz_id=quiz.id)
             db.session.add(new_item)
             quiz.total_items += 1
             db.session.commit()
@@ -94,6 +108,19 @@ def modify_quiz(quiz_id, quiz_title):
             return redirect(url_for('quiz.index'))
 
         return redirect(url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title))
+
+@quiz.route('/all_quizzes')
+@login_required
+def all_quizzes():
+    quizzes = Quiz.query.all()
+    return render_template('quiz/all_quizzes.html', quizzes=quizzes)
+
+
+@quiz.route('/answer_quiz/<int:quiz_id>/<string:quiz_title>')
+@login_required
+def answer_quiz(quiz_id, quiz_title):
+    quiz = Quiz.query.get(quiz_id)
+    return render_template('quiz/answer_quiz.html', quiz=quiz)
 
 
         

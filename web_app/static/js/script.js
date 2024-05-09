@@ -1,3 +1,5 @@
+// modify_quiz.html <<
+
 const changeTitleButton = document.getElementById('changeTitleButton');
 const changeQuizTitleForm = document.getElementById('changeQuizTitleForm');
 const updateInstrucButton = document.getElementById('updateInstrucButton');
@@ -33,3 +35,5 @@ deleteQuizButton.addEventListener('click', function() {
     hideAllForms();
     deleteQuizForm.style.display = 'block';
 })
+
+// >>

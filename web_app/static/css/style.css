@@ -1,4 +1,4 @@
-.navbar {
+.navbar, .dropdown-menu {
     background-color: black;
 }
 
@@ -6,15 +6,10 @@
     color: gray;
 }
 
-.navbar-brand {
+.navbar-brand, .dropdown-item {
     color: white;
 }
 
-.nav-link:hover, .navbar-brand:hover {
-    color: white;
-}
-
-a[aria-current="page"],
 .navbar-brand
 {
     font-weight: bold;

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %} | Answer Quizzes{% endblock %}
+
+{% block content %}
+    <h1>All quizzes on QuizMe</h1>
+
+    <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Number of Items</th>
+                <th>Answer Quiz</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for quiz in quizzes %}
+                <tr>
+                    <td>{{ quiz.title }}</td>
+                    <td>{{ quiz.user.username }}</td>
+                    <td>{{ quiz.total_items }}</td>
+                    <td>
+                        <a href="{{ url_for('quiz.answer_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}">Answer Quiz</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

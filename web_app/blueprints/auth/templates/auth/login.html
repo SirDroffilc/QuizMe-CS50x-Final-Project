@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} | Signup{% endblock %}
+{% block title %} | Log In{% endblock %}
 
 {% block content %}
 <h1>Log in</h1>
@@ -7,6 +7,6 @@
 <form action="{{ url_for('auth.login') }}" method="post">
     <input name="username" type="text" class="form-control" placeholder="Enter username" required autofocus>
     <input name="password" type="password" class="form-control" placeholder="Enter password">
-    <input type="submit" value="Sign Up">
+    <button type="submit" class="btn btn-dark">Log In</button>
 </form>
 {% endblock %}

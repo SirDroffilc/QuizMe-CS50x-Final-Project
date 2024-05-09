@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} | Create Quiz{% endblock %}
+{% block title %} | Modify Quiz{% endblock %}
 
 {% block content %}
     <h1>{{ quiz.title }}</h1>
@@ -8,9 +8,13 @@
     <ol class="list-group list-group-numbered">
         {% for item in quiz_items %}
         <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
+            <div class="ms-2">
                 <div class="fw-bold">{{ item.question }}</div>
-                Answer Key: {{ item.answer }}
+                <hr style="border-color: black;">
+                <div><b>Option A:</b> {{ item.option1 }} <b>Option B:</b> {{ item.option2 }} </div>
+                <div><b>Option C:</b> {{ item.option3 }} <b>Option D:</b> {{ item.option4 }}</div>
+                <hr style="border-color: black;">
+                <div class="fw-bold">Answer Key: {{ item.answer_key }}</div>
             </div>
             <form action="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}" method="post">
                 <input type="hidden" name="item_id" value="{{ item.id }}">
@@ -19,6 +23,7 @@
                 </button>
             </form>
         </li>
+        <br>
         {% endfor %}
     </ol>
 
@@ -31,20 +36,28 @@
 
     <form action="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}" method="post" id="changeQuizTitleForm" style="display: none;">
         <input name="new_title" class="form-control" type="text" placeholder="New title" required>
-        <input type="submit" value="Submit"></input>
+        <button type="submit" class="btn btn-dark">Submit</button>
     </form>
+
     <form action="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}" method="post" id="updateQuizInstrucForm" style="display: none;">
         <input name="new_instructions" class="form-control" type="text" placeholder="New instructions" required>
-        <input type="submit" value="Submit"></input>
+        <button type="submit" class="btn btn-dark">Submit</button>
     </form>
+
     <form action="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}" method="post" id="addQuestionForm" style="display: none;">
-        <textarea name="question" class="form-control" placeholder="Question" required></textarea> 
+        <textarea name="question" class="form-control" placeholder="Question" required></textarea>
+        <input name="option1" class="form-control" type="text" placeholder="Option 1" required>
+        <input name="option2" class="form-control" type="text" placeholder="Option 2" required>
+        <input name="option3" class="form-control" type="text" placeholder="Option 3" required>
+        <input name="option4" class="form-control" type="text" placeholder="Option 4" required>
+        <br />
         <input name="answer_key" class="form-control" type="text" placeholder="Answer Key" required>
-        <input type="submit" value="Submit"></input>
+        <button type="submit" class="btn btn-dark">Submit</button>
     </form>
+
     <form action="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}" method="post" id="deleteQuizForm" style="display: none;">
         <p>The quiz "{{ quiz.title }}" will be deleted.</p>
         <input name="quiz_id" type="hidden" value="{{ quiz.id }}">
-        <input type="submit" value="Confirm Delete"></input>
+        <button type="submit" class="btn btn-dark">Confirm Delete</button>
     </form>
 {% endblock %}

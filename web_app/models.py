@@ -25,7 +25,11 @@ class Item(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String(2000), nullable=False)
-    answer = db.Column(db.String(50), nullable=False)
+    option1 = db.Column(db.String(50), nullable=False)
+    option2 = db.Column(db.String(50), nullable=False)
+    option3 = db.Column(db.String(50), nullable=False)
+    option4 = db.Column(db.String(50), nullable=False)
+    answer_key = db.Column(db.String(50), nullable=False)
     quiz_id = db.Column(db.Integer, db.ForeignKey('quizzes.id'))
 
 
