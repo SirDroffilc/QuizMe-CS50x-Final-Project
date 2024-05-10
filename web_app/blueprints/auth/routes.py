@@ -69,8 +69,12 @@ def login():
                 flash("Logged in successfully", category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('feed.index'))
+            else:
+                flash('Incorrect password', category='error')
+                return redirect(url_for('auth.login'))
         else:
-            flash('Username not found', category='error')        
+            flash('Username not found', category='error')       
+            return redirect(url_for('auth.index')) 
 
 
 @auth.route('/logout', methods=['GET'])

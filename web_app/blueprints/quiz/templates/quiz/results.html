@@ -13,4 +13,8 @@
     <br>
     {% endfor %}
 
+    <a href="{{ url_for('quiz.all_quizzes') }}">
+        <button type="button" class="btn btn-dark">Back to All Quizzes</button>
+    </a>
+
 {% endblock %}
