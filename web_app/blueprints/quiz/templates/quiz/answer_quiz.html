@@ -5,9 +5,35 @@
     <h1>{{ quiz.title }}</h1>
     <p>Instructions: {{ quiz.instructions }}</p>
     
-    <form>
-        
+    <form action="{{ url_for('quiz.answer_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}" method="post">
+        <ol class="list-group list-group-numbered text-start">
+            {% for item in quiz.items %}
+            <li class="list-group-item">
+                {{ item.question}} <br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}_1" value="{{ item.option1 }}">
+                    <label class="form-check-label" for="option{{ loop.index }}_1">{{ item.option1 }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}_2" value="{{ item.option2 }}">
+                    <label class="form-check-label" for="option{{ loop.index }}_2">{{ item.option2 }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}_3" value="{{ item.option3 }}">
+                    <label class="form-check-label" for="option{{ loop.index }}_3">{{ item.option3 }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}_4" value="{{ item.option4 }}">
+                    <label class="form-check-label" for="option{{ loop.index }}_4">{{ item.option4 }}</label>
+                </div>
+            </li>
+            <br>
+            {% endfor %}
+        </ol>
+
+        <button type="submit" class="btn btn-dark">Submit Answers</button>
     </form>
+    
 
 
 {% endblock %}

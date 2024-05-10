@@ -116,12 +116,23 @@ def all_quizzes():
     return render_template('quiz/all_quizzes.html', quizzes=quizzes)
 
 
-@quiz.route('/answer_quiz/<int:quiz_id>/<string:quiz_title>')
+@quiz.route('/answer_quiz/<int:quiz_id>/<string:quiz_title>', methods=['GET', 'POST'])
 @login_required
 def answer_quiz(quiz_id, quiz_title):
     quiz = Quiz.query.get(quiz_id)
-    return render_template('quiz/answer_quiz.html', quiz=quiz)
 
+    if request.method == 'GET':
+        return render_template('quiz/answer_quiz.html', quiz=quiz)
+    
+    elif request.method == 'POST':
+        score = 0
+        selected_answers = {}
+        for item in quiz.items:
+            selected_answer = request.form.get('question{}'.format(quiz.items.index(item) + 1))
+            selected_answers[item.id] = selected_answer
+            if selected_answer == item.answer_key:
+                score += 1
+        return render_template('quiz/results.html', quiz=quiz, score=score, selected_answers=selected_answers)
 
         
 

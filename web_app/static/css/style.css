@@ -24,3 +24,12 @@ body {
     background-color: #001021;
     color: white;
 }
+
+.form-control {
+    background-color:  #333 !important;
+    color: white !important;
+}
+
+.form-control::placeholder {
+    color: #aaa;
+}

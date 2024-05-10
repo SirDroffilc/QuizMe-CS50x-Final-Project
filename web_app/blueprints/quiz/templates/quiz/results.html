@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %} | Modify Quiz{% endblock %}
+
+{% block content %}
+    <h1>Score: {{ score }} / {{ quiz.items | length }} </h1>
+    <h2>{{ quiz.title }}</h2>
+    <p>Instructions: {{ quiz.instructions }}</p>
+
+    {% for item in quiz.items %}
+    Question: {{ item.question }} <br>
+    Answer Key: {{ item.answer_key }} <br>
+    Selected Answer: {{ selected_answers[item.id] }} <br> 
+    <br>
+    {% endfor %}
+
+{% endblock %}

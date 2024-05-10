@@ -3,11 +3,12 @@
 
 {% block content %}
     <h1>Create a Quiz</h1>
+    <hr style="border-color: white;">
 
     <form action="{{ url_for('quiz.create')}}" method="post">
-        <input name="title" type="text" class="form-control" placeholder="Untitled Quiz" autofocus>
-        <textarea name="instructions" class="form-control" placeholder="Quiz Instructions"></textarea> 
-        <input type="submit" value="Create Quiz">
+        <input name="title" type="text" class="form-control" placeholder="Untitled Quiz" autofocus> <br>
+        <textarea name="instructions" class="form-control" placeholder="Quiz Instructions"></textarea> <br>
+        <button type="submit" class="btn btn-dark">Create Quiz</button>
     </form>
 
 {% endblock %}
