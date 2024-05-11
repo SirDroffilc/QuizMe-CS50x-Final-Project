@@ -1,8 +1,9 @@
 from flask import render_template, Blueprint, session, request, url_for, flash, redirect
 from flask_login import current_user, login_required
+from datetime import datetime, timezone
 
 from web_app.app import db
-from web_app.models import User, Quiz, Item
+from web_app.models import User, Quiz, Item, Post
 
 
 quiz = Blueprint('quiz', __name__, template_folder='templates')
@@ -34,6 +35,12 @@ def create():
 
         new_quiz = Quiz(title=title, instructions=instructions, total_items=0, user_id=current_user.id)
         db.session.add(new_quiz)
+
+        # Automatic post
+        datetime_now = datetime.now(timezone.utc)
+        post_caption = f'{current_user.username} just published "{new_quiz.title}"'
+        created_quiz_post = Post(title="New Quiz!", caption=post_caption, date=datetime_now, user_id=new_quiz.user_id)
+        db.session.add(created_quiz_post)
         db.session.commit()
 
         flash(f"Quiz '{title}' successfully created!", category='success')

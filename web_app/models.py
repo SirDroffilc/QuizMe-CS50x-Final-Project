@@ -1,5 +1,7 @@
 from .app import db
 from flask_login import UserMixin
+from datetime import datetime, timezone
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -8,6 +10,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(500), nullable=False)
     quizzes = db.relationship('Quiz', cascade="all, delete-orphan", backref="user")
+    posts = db.relationship('Post', cascade="all, delete-orphan", backref='user')
 
 class Quiz(db.Model):
     __tablename__ = 'quizzes'
@@ -31,5 +34,15 @@ class Item(db.Model):
     option4 = db.Column(db.String(50), nullable=False)
     answer_key = db.Column(db.String(50), nullable=False)
     quiz_id = db.Column(db.Integer, db.ForeignKey('quizzes.id'))
+
+
+class Post(db.Model):
+    __tablename__ = 'posts'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), default="Untitled")
+    caption = db.Column(db.String(2000), nullable=False)
+    date = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
