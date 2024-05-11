@@ -2,12 +2,22 @@
 {% block title %} | Log In{% endblock %}
 
 {% block content %}
-<h1>Log in</h1>
-<hr style="border-color: white;">
+<div class="login-container" data-bs-theme="dark">
+    <div class="quizme-content align-self-center">
+        <p class="h1">QuizMe</p>
+        <hr style="border-color: white;">
+        <p class="h5 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae nemo qui cupiditate, aperiam incidunt distinctio minus? Tempore, illo accusantium sint eius voluptatum inventore suscipit in velit repellendus temporibus delectus nisi?</p>
+    </div>
+    <div class="login-content align-self-center">
+        <p class="h4 text-left">Log in</p>
+        <hr style="border-color: white;">
+        <form action="{{ url_for('auth.login') }}" method="post">
+            <input name="username" type="text" class="form-control border-0" placeholder="Enter username" required autofocus> <br>
+            <input name="password" type="password" class="form-control border-0" placeholder="Enter password"> <br>
+            <button type="submit" class="btn btn-dark w-100 border-0 btn-hover-effect">Log In</button>
+        </form>
+    </div>
+</div>
 
-<form action="{{ url_for('auth.login') }}" method="post">
-    <input name="username" type="text" class="form-control" placeholder="Enter username" required autofocus> <br>
-    <input name="password" type="password" class="form-control" placeholder="Enter password"> <br>
-    <button type="submit" class="btn btn-dark">Log In</button>
-</form>
 {% endblock %}
