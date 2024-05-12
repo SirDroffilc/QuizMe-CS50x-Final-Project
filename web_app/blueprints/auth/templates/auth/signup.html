@@ -2,13 +2,23 @@
 {% block title %} | Sign Up{% endblock %}
 
 {% block content %}
-<h1>Sign Up</h1>
-<hr style="border-color: white;">
+<div class="signup-container" data-bs-theme="dark">
+    <div class="quizme-content align-self-center">
+        <p class="h1">QuizMe</p>
+        <hr style="border-color: white;">
+        <p class="h5 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae nemo qui cupiditate, aperiam incidunt distinctio minus? Tempore, illo accusantium sint eius voluptatum inventore suscipit in velit repellendus temporibus delectus nisi?</p>
+    </div>
+    <div class="signup-content align-self-center">
+        <p class="h4 text-left">Sign Up</p>
+        <hr style="border-color: white;">
+        <form action="{{ url_for('auth.signup') }}" method="post">
+            <input name="username" type="text" class="form-control border-0" placeholder="Enter a new username" required autofocus> <br>
+            <input name="password1" type="password" class="form-control border-0" placeholder="Enter a password"> <br>
+            <input name="password2" type="password" class="form-control border-0" placeholder="Confirm your password"> <br>
+            <button type="submit" class="btn btn-dark w-100 border-0 btn-hover-effect">Sign Up</button>
+        </form>
+    </div>
+</div>
 
-<form action="{{ url_for('auth.signup') }}" method="post">
-    <input name="username" type="text" class="form-control" placeholder="Enter a new username" required autofocus> <br>
-    <input name="password1" type="password" class="form-control" placeholder="Enter a password"> <br>
-    <input name="password2" type="password" class="form-control" placeholder="Enter a password"> <br>
-    <button type="submit" class="btn btn-dark">Sign Up</button>
-</form>
 {% endblock %}

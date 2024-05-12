@@ -26,7 +26,7 @@ body {
 }
 
 .form-control {
-    background-color:  #333 !important;
+    background-color:  #1C3351 !important;
     color: white !important;
 }
 
@@ -35,14 +35,14 @@ body {
 }
 
 
-.login-container {
+.login-container, .signup-container {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: calc(70vh);
 }
 
-.login-content {
+.login-content, .signup-content {
     padding: 2rem;
     width: 40vw;
     background-color: #001933;
@@ -67,11 +67,11 @@ body {
 }
 
 @media (max-width: 768px) {
-    .login-container {
+    .login-container, .signup-container {
         flex-direction: column;
     }
 
-    .login-content, .quizme-content {
+    .login-content, .signup-content, .quizme-content {
         width: 80vw;
         padding: 1rem;
     }
