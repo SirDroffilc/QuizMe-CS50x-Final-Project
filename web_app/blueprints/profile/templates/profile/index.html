@@ -2,5 +2,99 @@
 {% block title %} | Profile{% endblock %}
 
 {% block content %}
+    <style>
+        .feedblock {
+            background-color: #1C3351;
+            color: #e5e5e5;
+            border-radius: 1rem;
+        }
+    </style>
     <h1>{{ current_user.username }}</h1>
+    <p>Number of Quizzes: {{ quizzes | length }}</p>
+    <p>Total Number of Questions: {{ total_items }} </p>
+
+    <!-- Buttons -->
+    <button type="button" class="btn btn-dark" id="changeUsernameButton">Change Username</button>
+    <button type="button" class="btn btn-dark" id="changePasswordButton">Change Password</button>
+    <button type="button" class="btn btn-dark" id="deleteAccountButton">Delete Account</button>
+    <br> <br>
+
+    <!-- Forms -->
+    <form action="{{ url_for('profile.index') }}" method="post" id="changeUsernameForm" style="display: none;">
+        <h3>Change Username</h3>
+        <input name="new_username" class="form-control" type="text" placeholder="New Username" required> <br>
+        <input name="password" class="form-control" type="password" placeholder="Confirm Password" required> <br>
+        <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+
+    <form action="{{ url_for('profile.index') }}" method="post" id="changePasswordForm" style="display: none;">
+        <h3>Change Password</h3>
+        <input name="old_password" class="form-control" type="password" placeholder="Old Password" required> <br>
+        <input name="new_password" class="form-control" type="password" placeholder="New Password" required> <br>
+        <input name="new_password2" class="form-control" type="password" placeholder="Confirm New Password" required> <br>
+        <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+
+    <form action="{{ url_for('profile.index') }}" method="post" id="deleteAccountForm" style="display: none;">
+        <h3>Delete Account</h3>
+        <input name="to_delete_id" type="hidden" value="{{ user.id }}">
+        <input name="password" class="form-control" type="password" placeholder="Confirm Password" required> <br>
+        <button class="btn btn-dark">Delete Account</button>
+        <div>
+            <p></p>
+        </div>
+    </form>
+
+    <script>
+        const changeUsernameButton = document.getElementById('changeUsernameButton');
+        const changePasswordButton = document.getElementById('changePasswordButton');
+        const deleteAccountButton = document.getElementById('deleteAccountButton');
+
+        const changeUsernameForm = document.getElementById('changeUsernameForm');
+        const changePasswordForm = document.getElementById('changePasswordForm');
+        const deleteAccountForm = document.getElementById('deleteAccountForm');
+
+        function hideAllForms() {
+            changeUsernameForm.style.display = 'none';
+            changePasswordForm.style.display = 'none';
+            deleteAccountForm.style.display = 'none';
+        }
+
+        changeUsernameButton.addEventListener('click', function() {
+            hideAllForms();
+            changeUsernameForm.style.display = 'block';
+        });
+
+        changePasswordButton.addEventListener('click', function() {
+            hideAllForms();
+            changePasswordForm.style.display = 'block';
+        });
+
+        deleteAccountButton.addEventListener('click', function() {
+            hideAllForms();
+            deleteAccountForm.style.display = 'block';
+        });
+    </script>
+
+    <hr style="border-color: white;">
+
+    <h2>Posts</h2>
+
+    <ul class="list-group">
+        {% for post in posts %}
+        <li class="list-group-item feedblock">
+            <div class="d-flex justify-content-between">
+                <h2><b>{{ post.user.username }}</b></h2>
+                <p class="mb-0">{{ post.date.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+            </div><hr style="border-color: white; margin-top: 0;">
+            
+            {% if post.title != "Untitled" %}
+            <h4><b>{{ post.title }}</b></h4>
+            {% endif %}
+            <p>{{ post.caption }}</p>
+        </li>
+        <br>
+        {% endfor %}
+    </ul>
+    
 {% endblock %}

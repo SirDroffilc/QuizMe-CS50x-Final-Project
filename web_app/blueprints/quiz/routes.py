@@ -112,6 +112,7 @@ def modify_quiz(quiz_id, quiz_title):
         elif 'quiz_id' in request.form.keys(): # delete the quiz and redirect to index
             db.session.delete(quiz)
             db.session.commit()
+            flash(f"'{quiz.title}' deleted.", category="success")
             return redirect(url_for('quiz.index'))
 
         return redirect(url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title))
