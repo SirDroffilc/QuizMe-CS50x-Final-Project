@@ -27,3 +27,34 @@
 - **Database**: SQLite
 
 ## Installation Instructions
+#### 1. Clone the repository
+- 'git clone https://github.com/SirDroffilc/QuizMe-CS50x-Final-Project'
+
+#### 2. Install dependencies
+- 'pip install -r requirements.txt'
+
+#### 3. Run
+- Run 'run.py' and open the address or link on a browser.
+
+## Usage
+#### 1. Sign-Up and Log-In
+- Look at the Sign Up or Log In Tabs on the navigation bar at the top.
+- Create a new account or log in an existing account
+
+#### 2. Feed
+- Click the Feed Tab in the navigation bar.
+- Share your thoughts by posting in the feed. These posts will contain the content, your username, as well as the date and time of posting.
+- Scroll through all the posts in the feed.
+
+#### 3. Quiz
+- Click at the Quiz Tab. You will see Your Quizzes, Create a Quiz, and Answer Quizzes
+- 'Your Quizzes' displays all your created quizzes. Select a quiz to modify it (change title, update instructions, add question, or delete quiz).
+- 'Create a Quiz' prompts you for the title and instructions. You can then add questions by selecting this quiz at the 'Your Quizzes' Tab.
+- 'Answer Quzzes' displays all the created quizzes by all users. Click on the 'Answer Quiz' to take the quiz.
+  
+#### 4. Profile
+- Displays your profile information and all the posts you have created.
+- You can choose to change your username or password, as well as to delete your account (deleting an account also deletes all the posts and quizzes of that account).
+
+#### 5. Log Out
+- Logs out your account and takes you back to Home.
