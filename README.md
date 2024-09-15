@@ -22,8 +22,8 @@
 
 ## Technologies Used
 
-### 1. **Backend**: Python with Flask
-### 2. **Frontend**: HTML, CSS, and JS with Bootstrap
-### 3. **Database**: SQLite
+- **Backend**: Python with Flask
+- **Frontend**: HTML, CSS, and JS with Bootstrap
+- **Database**: SQLite
 
 ## Installation Instructions
