@@ -48,7 +48,7 @@ def signup():
             login_user(new_user, remember=True)
             flash("Account successfully created!", category='success')
             return redirect(url_for('feed.index'))
-        
+
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
