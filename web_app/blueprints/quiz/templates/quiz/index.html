@@ -2,9 +2,44 @@
 {% block title %} | Quiz{% endblock %}
 
 {% block content %}
-    <h1>{{ current_user.username }}'s Quizzes</h1>
+    <style>
+        .quizblock {
+            background-color: #1C3351;
+            color: #e5e5e5;
+            border-radius: 1rem;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0,0,0,.05);
+        }
+        .table-striped tbody tr:hover {
+            background-color: rgba(0,0,0,.075);
+        }
+        .table thead th, .table tbody td{
+            background-color: #021d3a;
+            color: #e5e5e5;
+        }
+        .table tbody td{
+            background-color: #1C3351;
+            color: #e5e5e5;
+        }
+        .table td, .table th {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #001021;
+        }
+        .btn-dark {
+            background-color: #1C3351;
+            border-color: #1C3351;
+        }
+        .btn-dark:hover {
+            background-color: #16324A;
+            border-color: #16324A;
+        }
+    </style>
 
-    <br>
+    <h1>{{ current_user.username }}'s Quizzes</h1>
+    <hr style="border-color: white;">
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -16,13 +51,14 @@
          
         <tbody>
             {% for quiz in quizzes %}
-            <tr>
+            <tr class="quizblock">
                 <td>{{ quiz.title }}</td>
                 <td>{{ quiz.total_items }}</td>
                 <td>
-                    <a href="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}">Select Quiz</a>
+                    <a href="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}" class="btn btn-dark">Select Quiz</a>
                 </td>
             </tr>
+            <br>
             {% endfor %}
         </tbody>
     </table>
@@ -30,5 +66,4 @@
     <a href="{{ url_for('quiz.create')}}">
         <button type="button" class="btn btn-dark">Create a Quiz</button>
     </a>
-
 {% endblock %}

@@ -2,6 +2,34 @@
 {% block title %} | Answer Quizzes{% endblock %}
 
 {% block content %}
+    <style>
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0,0,0,.05);
+        }
+        .table-striped tbody tr:hover {
+            background-color: rgba(0,0,0,.075);
+        }
+        .table thead th, .table tbody td{
+            background-color: #021d3a;
+            color: #e5e5e5;
+        }
+        .table tbody td{
+            background-color: #1C3351;
+            color: #e5e5e5;
+        }
+        .table td, .table th {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #001021;
+        }
+        .table a {
+            color: #1C3351;
+            text-decoration: none;
+        }
+        .table a:hover {
+            text-decoration: underline;
+        }
+    </style>
     <h1>All quizzes on QuizMe</h1>
 
     <br>
