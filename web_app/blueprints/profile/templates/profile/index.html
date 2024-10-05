@@ -2,24 +2,82 @@
 {% block title %} | Profile{% endblock %}
 
 {% block content %}
-    <style>
-        .feedblock {
-            background-color: #1C3351;
-            color: #e5e5e5;
-            border-radius: 1rem;
-        }
-    </style>
+<style>
+    .profile-container {
+        background-color: #1C3351;
+        color: #e5e5e5;
+        border-radius: 1rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    .btn-dark {
+        background-color: #031a33;
+        border-color: #041323;
+        border-radius: .5rem;
+        margin-right: .5rem;
+    }
+    .btn-dark:hover {
+        background-color: #00081A;
+        border-color: #00081A;
+    }
+    .form-control {
+        background-color: #1C3351;
+        color: #e5e5e5;
+        border: 1px solid #dee2e6;
+    }
+    .form-control::placeholder {
+        color: #dee2e6;
+    }
+    .profile-stats {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+    .feedblock {
+        background-color: #1C3351;
+        color: #e5e5e5;
+        border-radius: 1rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
+    }
+    .feedblock h2, .feedblock h4, .feedblock p {
+        margin: 0;
+    }
+    .feedblock hr {
+        border-color: #e5e5e5;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .feedblock .d-flex {
+        align-items: center;
+    }
+    .feedblock .d-flex h2 {
+        font-size: 1.5rem;
+    }
+    .feedblock .d-flex p {
+        font-size: 0.875rem;
+    }
+</style>
+<div class="profile-container">
     <h1>{{ current_user.username }}</h1>
-    <p>Number of Quizzes: {{ quizzes | length }}</p>
-    <p>Total Number of Questions: {{ total_items }} </p>
+    <div class="profile-stats">
+        <p>Number of Quizzes: {{ quizzes | length }}</p>
+        <p>Total Number of Questions: {{ total_items }}</p>
+    </div>
 
-    <!-- Buttons -->
-    <button type="button" class="btn btn-dark" id="changeUsernameButton">Change Username</button>
-    <button type="button" class="btn btn-dark" id="changePasswordButton">Change Password</button>
-    <button type="button" class="btn btn-dark" id="deleteAccountButton">Delete Account</button>
-    <br> <br>
+    <hr style="border-color: white;">
 
-    <!-- Forms -->
+    <div class="button-group">
+        <button type="button" class="btn btn-dark" id="changeUsernameButton">Change Username</button>
+        <button type="button" class="btn btn-dark" id="changePasswordButton">Change Password</button>
+        <button type="button" class="btn btn-dark" id="deleteAccountButton">Delete Account</button>
+    </div>
+
     <form action="{{ url_for('profile.index') }}" method="post" id="changeUsernameForm" style="display: none;">
         <h3>Change Username</h3>
         <input name="new_username" class="form-control" type="text" placeholder="New Username" required> <br>
@@ -44,37 +102,38 @@
             <p></p>
         </div>
     </form>
+</div>
 
-    <script>
-        const changeUsernameButton = document.getElementById('changeUsernameButton');
-        const changePasswordButton = document.getElementById('changePasswordButton');
-        const deleteAccountButton = document.getElementById('deleteAccountButton');
+<script>
+    const changeUsernameButton = document.getElementById('changeUsernameButton');
+    const changePasswordButton = document.getElementById('changePasswordButton');
+    const deleteAccountButton = document.getElementById('deleteAccountButton');
 
-        const changeUsernameForm = document.getElementById('changeUsernameForm');
-        const changePasswordForm = document.getElementById('changePasswordForm');
-        const deleteAccountForm = document.getElementById('deleteAccountForm');
+    const changeUsernameForm = document.getElementById('changeUsernameForm');
+    const changePasswordForm = document.getElementById('changePasswordForm');
+    const deleteAccountForm = document.getElementById('deleteAccountForm');
 
-        function hideAllForms() {
-            changeUsernameForm.style.display = 'none';
-            changePasswordForm.style.display = 'none';
-            deleteAccountForm.style.display = 'none';
-        }
+    function hideAllForms() {
+        changeUsernameForm.style.display = 'none';
+        changePasswordForm.style.display = 'none';
+        deleteAccountForm.style.display = 'none';
+    }
 
-        changeUsernameButton.addEventListener('click', function() {
-            hideAllForms();
-            changeUsernameForm.style.display = 'block';
-        });
+    changeUsernameButton.addEventListener('click', function() {
+        hideAllForms();
+        changeUsernameForm.style.display = 'block';
+    });
 
-        changePasswordButton.addEventListener('click', function() {
-            hideAllForms();
-            changePasswordForm.style.display = 'block';
-        });
+    changePasswordButton.addEventListener('click', function() {
+        hideAllForms();
+        changePasswordForm.style.display = 'block';
+    });
 
-        deleteAccountButton.addEventListener('click', function() {
-            hideAllForms();
-            deleteAccountForm.style.display = 'block';
-        });
-    </script>
+    deleteAccountButton.addEventListener('click', function() {
+        hideAllForms();
+        deleteAccountForm.style.display = 'block';
+    });
+</script>
 
     <hr style="border-color: white;">
 
