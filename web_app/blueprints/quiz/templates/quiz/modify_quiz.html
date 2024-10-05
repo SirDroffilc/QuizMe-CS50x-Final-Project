@@ -2,6 +2,42 @@
 {% block title %} | Modify Quiz{% endblock %}
 
 {% block content %}
+    <style>
+        .list-group-item {
+            background-color: #1C3351;
+            color: #e5e5e5;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+        }
+        .list-group-item hr {
+            border-color: #e5e5e5;
+        }
+        .btn-dark {
+            background-color: #1C3351;
+            width: 100%;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            font-size: 1.25rem;
+            border-radius: 0.5rem;
+            color: #e5e5e5;
+            text-align: center;
+            cursor: pointer;
+        }
+        .btn-dark:hover {
+            background-color: #00081A;
+        }
+        .form-control {
+            background-color: #1C3351;
+            color: #e5e5e5;
+            border: 1px solid #dee2e6;
+            margin-bottom: 0.5rem;
+        }
+        .form-control::placeholder {
+            color: #dee2e6;
+        }
+    </style>
+
     <h1>{{ quiz.title }}</h1>
     <p>Instructions: {{ quiz.instructions }}</p>
 
@@ -10,16 +46,16 @@
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2">
                 <div class="fw-bold">{{ item.question }}</div>
-                <hr style="border-color: black;">
-                <div><b>Option A:</b> {{ item.option1 }} <b>Option B:</b> {{ item.option2 }} </div>
+                <hr>
+                <div><b>Option A:</b> {{ item.option1 }} <b>Option B:</b> {{ item.option2 }}</div>
                 <div><b>Option C:</b> {{ item.option3 }} <b>Option D:</b> {{ item.option4 }}</div>
-                <hr style="border-color: black;">
+                <hr>
                 <div class="fw-bold">Answer Key: {{ item.answer_key }}</div>
             </div>
             <form action="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}" method="post">
                 <input type="hidden" name="item_id" value="{{ item.id }}">
                 <button type="submit" class="close" aria-label="Close">
-                    <span>&times;</span>
+                    <span>×</span>
                 </button>
             </form>
         </li>

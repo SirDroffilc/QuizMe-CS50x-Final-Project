@@ -2,19 +2,53 @@
 {% block title %} | Modify Quiz{% endblock %}
 
 {% block content %}
-    <h1>Score: {{ score }} / {{ quiz.items | length }} </h1>
-    <h2>{{ quiz.title }}</h2>
-    <p>Instructions: {{ quiz.instructions }}</p>
+    <style>
+        .result-container {
+            background-color: #1C3351;
+            color: #e5e5e5;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .result-container h1, .result-container h2, .result-container p {
+            margin: 0 0 1rem 0;
+        }
+        .result-item {
+            background-color: #2A4A6B;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .btn-dark {
+            background-color: #2A4A6B;
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1.25rem;
+            border-radius: 0.5rem;
+            color: #e5e5e5;
+            text-align: center;
+            cursor: pointer;
+        }
+        .btn-dark:hover {
+            background-color: #00081A;
+        }
+    </style>
 
-    {% for item in quiz.items %}
-    Question: {{ item.question }} <br>
-    Answer Key: {{ item.answer_key }} <br>
-    Selected Answer: {{ selected_answers[item.id] }} <br> 
-    <br>
-    {% endfor %}
+    <div class="result-container">
+        <h1>Score: {{ score }} / {{ quiz.items | length }}</h1>
+        <h2>{{ quiz.title }}</h2>
+        <p>Instructions: {{ quiz.instructions }}</p>
 
-    <a href="{{ url_for('quiz.all_quizzes') }}">
-        <button type="button" class="btn btn-dark">Back to All Quizzes</button>
-    </a>
+        {% for item in quiz.items %}
+        <div class="result-item">
+            <p><strong>Question:</strong> {{ item.question }}</p>
+            <p><strong>Answer Key:</strong> {{ item.answer_key }}</p>
+            <p><strong>Selected Answer:</strong> {{ selected_answers[item.id] }}</p>
+        </div>
+        {% endfor %}
 
+        <a href="{{ url_for('quiz.all_quizzes') }}">
+            <button type="button" class="btn btn-dark">Back to All Quizzes</button>
+        </a>
+    </div>
 {% endblock %}

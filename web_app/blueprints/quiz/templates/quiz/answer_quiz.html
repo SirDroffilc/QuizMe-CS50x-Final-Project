@@ -2,6 +2,63 @@
 {% block title %} | Modify Quiz{% endblock %}
 
 {% block content %}
+    <style>
+        .list-group-item {
+            background-color: #1C3351;
+            color: #e5e5e5;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+        }
+
+        .choices-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .choice {
+            background-color: #001021;
+            border: 1px solid #001021;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            color: #e5e5e5;
+            width: 100%;
+        }
+
+        .choice:hover {
+            background-color: #00081A;
+        }
+
+        .form-check-input {
+            display: none;
+        }
+
+        .form-check-input:checked + .choice {
+            background-color: #00040e;
+        }
+
+        .btn-dark {
+            background-color: #1C3351;
+            width: 100%;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            font-size: 1.25rem;
+            border-radius: 0.5rem;
+            color: #e5e5e5;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-dark:hover {
+            background-color: #00081A;
+        }
+
+    </style>
+
     <h1>{{ quiz.title }}</h1>
     <p>Instructions: {{ quiz.instructions }}</p>
     
@@ -9,22 +66,24 @@
         <ol class="list-group list-group-numbered text-start">
             {% for item in quiz.items %}
             <li class="list-group-item">
-                {{ item.question}} <br>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}_1" value="{{ item.option1 }}">
-                    <label class="form-check-label" for="option{{ loop.index }}_1">{{ item.option1 }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}_2" value="{{ item.option2 }}">
-                    <label class="form-check-label" for="option{{ loop.index }}_2">{{ item.option2 }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}_3" value="{{ item.option3 }}">
-                    <label class="form-check-label" for="option{{ loop.index }}_3">{{ item.option3 }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}_4" value="{{ item.option4 }}">
-                    <label class="form-check-label" for="option{{ loop.index }}_4">{{ item.option4 }}</label>
+                {{ item.question }} <br>
+                <div class="choices-container">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}_1" value="{{ item.option1 }}">
+                        <label class="choice" for="option{{ loop.index }}_1">{{ item.option1 }}</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}_2" value="{{ item.option2 }}">
+                        <label class="choice" for="option{{ loop.index }}_2">{{ item.option2 }}</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}_3" value="{{ item.option3 }}">
+                        <label class="choice" for="option{{ loop.index }}_3">{{ item.option3 }}</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}_4" value="{{ item.option4 }}">
+                        <label class="choice" for="option{{ loop.index }}_4">{{ item.option4 }}</label>
+                    </div>
                 </div>
             </li>
             <br>
@@ -33,7 +92,4 @@
 
         <button type="submit" class="btn btn-dark">Submit Answers</button>
     </form>
-    
-
-
 {% endblock %}
