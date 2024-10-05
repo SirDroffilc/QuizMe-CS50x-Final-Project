@@ -2,33 +2,84 @@
 {% block title %} | Quiz{% endblock %}
 
 {% block content %}
-    <h1>{{ current_user.username }}'s Quizzes</h1>
+<style>
+    .quizblock {
+        background-color: #1C3351;
+        color: #e5e5e5;
+        border-radius: 1rem;
+    }
+    .table {
+        border-collapse: collapse;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(0,0,0,.05);
+    }
+    .table-striped tbody tr:hover {
+        background-color: rgba(0,0,0,.075);
+    }
+    .table thead th, .table tbody td {
+        background-color: #021d3a;
+        color: #e5e5e5;
+    }
+    .table tbody td {
+        background-color: #1C3351;
+        color: #e5e5e5;
+    }
+    .table td, .table th {
+        padding: 0.5rem;
+        vertical-align: middle;
+        border: none;
+    }
 
-    <br>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-              <th>Title</th>
-              <th>Number of Items</th>
-              <th>Modify Quiz/Add Questions</th>
-            </tr>
-        </thead>
-         
-        <tbody>
-            {% for quiz in quizzes %}
-            <tr>
-                <td>{{ quiz.title }}</td>
-                <td>{{ quiz.total_items }}</td>
-                <td>
-                    <a href="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}">Select Quiz</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    .btn-dark {
+        background-color: #1C3351;
+        border-color: #1C3351;
+        padding: 0.5rem 1rem;
+        margin: 0;
+    }
+    .btn-dark:hover {
+        background-color: #16324A;
+        border-color: #16324A;
+    }
 
-    <a href="{{ url_for('quiz.create')}}">
-        <button type="button" class="btn btn-dark">Create a Quiz</button>
-    </a>
+    h1 {
+        margin-bottom: 1rem;
+    }
+    hr {
+        border-color: white;
+        margin: 1rem 0;
+    }
+    table {
+        margin-top: 0;
+    }
+</style>
 
+<h1>{{ current_user.username }}'s Quizzes</h1>
+<hr>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Number of Items</th>
+            <th>Modify Quiz/Add Questions</th>
+        </tr>
+    </thead>
+     
+    <tbody>
+        {% for quiz in quizzes %}
+        <tr class="quizblock">
+            <td>{{ quiz.title }}</td>
+            <td>{{ quiz.total_items }}</td>
+            <td>
+                <a href="{{ url_for('quiz.modify_quiz', quiz_id=quiz.id, quiz_title=quiz.title) }}" class="btn btn-dark">Select Quiz</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('quiz.create') }}">
+    <button type="button" class="btn btn-dark">Create a Quiz</button>
+</a>
 {% endblock %}

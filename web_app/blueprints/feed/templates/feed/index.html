@@ -2,37 +2,49 @@
 {% block title %} | Feed{% endblock %}
 
 {% block content %}
-    <style>
-        .feedblock {
-            background-color: #1C3351;
-            color: #e5e5e5;
-            border-radius: 1rem;
-        }
-    </style>
+<style>
+    .feedblock {
+        background-color: #1C3351;
+        color: #e5e5e5;
+        border-radius: 1rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
+    }
+    .btn-dark {
+        background-color: #1C3351;
+        color: #e5e5e5;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        margin-top: 0.5rem;
+    }
+    .btn-dark:hover {
+            background-color: #00081A;
+    }
+</style>
 
-    <h1>QuizMe Feed</h1>
-    <hr style="border-color: white;">
+<h1>QuizMe Feed</h1>
+<hr style="border-color: white;">
 
-    <form action="{{ url_for('feed.post')}}" method="post">
-        <textarea name="caption" class="form-control" placeholder="What's on your mind, {{ current_user.username }}?"></textarea> <br>
-        <button type="submit" class="btn btn-dark">Post</button>
-    </form>
-    <hr style="border-color: white;">
+<form action="{{ url_for('feed.post')}}" method="post">
+    <textarea name="caption" class="form-control" placeholder="What's on your mind, {{ current_user.username }}?"></textarea> <br>
+    <button type="submit" class="btn btn-dark">Post</button>
+</form>
+<hr style="border-color: white;">
 
-    <ul class="list-group">
-        {% for post in posts %}
-        <li class="list-group-item feedblock">
-            <div class="d-flex justify-content-between">
-                <h2><b>{{ post.user.username }}</b></h2>
-                <p class="mb-0">{{ post.date.strftime('%Y-%m-%d %H:%M:%S') }}</p>
-            </div><hr style="border-color: white; margin-top: 0;">
-            
-            {% if post.title != "Untitled" %}
-            <h4><b>{{ post.title }}</b></h4>
-            {% endif %}
-            <p>{{ post.caption }}</p>
-        </li>
-        <br>
-        {% endfor %}
-    </ul>
+<ul class="list-group">
+    {% for post in posts %}
+    <li class="list-group-item feedblock">
+        <div class="d-flex justify-content-between">
+            <h2><b>{{ post.user.username }}</b></h2>
+            <p class="mb-0">{{ post.date.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+        </div>
+        <hr style="border-color: white; margin-top: 0;">
+
+        {% if post.title != "Untitled" %}
+        <h4><b>{{ post.title }}</b></h4>
+        {% endif %}
+        <p>{{ post.caption }}</p>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}
