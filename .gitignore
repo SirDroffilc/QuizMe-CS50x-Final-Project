@@ -1,12 +1,2 @@
-# Virtual environment
 venv/
-
-# MS Word
-*.docx
-
-# Python bytecode
-__pycache__/
-*.py[cod]
-
-# VSCode settings
-.vscode/
+.docx
