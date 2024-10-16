@@ -94,3 +94,15 @@
 
 - Click the Log Out Tab at the navigation bar.
 - This will log out your account and take you back to Home.
+
+## Developers
+
+### Ford Torion
+
+- [GitHub](https://github.com/SirDroffilc)
+- [LinkedIn](https://www.linkedin.com/feed/)
+
+### Patrick Ancajas
+
+- [GitHub](https://github.com/JohnPatrickAncajas)
+- [LinkedIn](https://www.linkedin.com/in/john-patrick-ancajas-2b808828a/)
