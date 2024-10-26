@@ -9,7 +9,7 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__, template_folder='templates', static_folder='static')
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./testdb.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://u7go8cea2bqekf:pf41f59136314aa4a022748e360dc46be6ebf2318a7113678c4ac2e9e0bb851d2@cbec45869p4jbu.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/deqvhhimq71r16'
     app.secret_key = 'njcidjw2l1;a2@fnid&82(8@)'
     db.init_app(app)
 
