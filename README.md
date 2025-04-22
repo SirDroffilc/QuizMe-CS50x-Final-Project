@@ -6,6 +6,14 @@
 
 **QuizMe** is a full-stack web application that allows users to create and share custom quizzes. Users can take quizzes created by others, view their results, and engage with the community through a feed where they can post updates. The app includes user authentication for secure access to personalized quiz experiences and content.
 
+## Preview
+These are screen captures of some of the features/pages of the web app. 
+![QuizMe-Signup](preview/QuizMe-Signup.png)
+![QuizMe-YourQuizzes](preview/QuizMe-YourQuizzes.png)
+![QuizMe-AllQuizzes](preview/QuizMe-AllQuizzes.png)
+![QuizMe-AnswerQuiz](preview/QuizMe-AnswerQuiz.png)
+![QuizMe-Feed](preview/QuizMe-Feed.png)
+
 ## Key Features
 
 ### 1. User Authentication
